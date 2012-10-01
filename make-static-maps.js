@@ -46,18 +46,22 @@ for( var t in template ) {
 }
 
 
-var encoder;
+states.index('abbr').index('fips').index('name');
 
 
 // Startup code, called from the GeoJSONP file
 function loadGeoJSON( geo ) {
-	encoder = new PolylineEncoder();
 	_.each( geo.state.features, loadFeature );
 }
 
 
 function loadFeature( feature ) {
+	var state = featureState( feature );
+	var min = state.min || 40;
 	var encodeds = encodeFeature( feature );
+	encodeds = _.filter( encodeds, function( encoded ) {
+		return encoded.points.length >= min;
+	});
 	var paths = _.map( encodeds, pathFromEncoded );
 	var vars = {
 		key: settings.apiKey,
@@ -83,6 +87,8 @@ function pathFromEncoded( encoded ) {
 
 
 function encodeFeature( feature ) {
+	var state = featureState( feature );
+	encoder = new PolylineEncoder( 1, 1, state.tiny || .05 );
 	var geometry = feature.geometry,
 		type = geometry.type,
 		coords = geometry.coordinates,
@@ -90,18 +96,21 @@ function encodeFeature( feature ) {
 			type == 'Polygon' ? [ coords ] :
 			type == 'MultiPolygon' ? coords :
 			[];
-	return _.map( polys, encodePoly );
+	return _.map( polys, function( poly ) {
+		var ring = poly[0];  // outer ring only
+		var points = _.map( ring, function( point ) {
+			var lngLat = PolyGonzo.Mercator.coordToLngLat( point );
+			return new PolylineEncoder.latLng( lngLat[1], lngLat[0] );
+		});
+		var encoded = encoder.dpEncodeToJSON( points );
+		encoded.color = '0x000000C0';
+		encoded.fillColor = '0x00000010';
+		return encoded;
+	});
 }
 
 
-function encodePoly( poly ) {
-	var ring = poly[0];  // outer ring only
-	var points = _.map( ring, function( point ) {
-		var lngLat = PolyGonzo.Mercator.coordToLngLat( point );
-		return new PolylineEncoder.latLng( lngLat[1], lngLat[0] );
-	});
-	var encoded = encoder.dpEncodeToJSON( points );
-	encoded.color = '0x000000C0';
-	encoded.fillColor = '0x00000010';
-	return encoded;
+function featureState( feature ) {
+	var fips = feature.id.split('US')[1];
+	return states.by.fips[fips];
 }
