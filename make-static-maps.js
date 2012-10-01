@@ -24,7 +24,7 @@ var template = {
 				 style="border:none; width:{{width}}px; height:{{height}}px;" \
 			>\
 		</div>',
-	staticMapURL: 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&NOTkey={{key}}&size={{width}}x{{height}}&{{{paths}}}',
+	staticMapURL: 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={{key}}&size={{width}}x{{height}}&{{{paths}}}',
 	//staticPath: 'path=color:{{color}}%7Cweight:{{weight}}%7Cfillcolor:{{fillColor}}%7Cenc:{{points}}'
 	staticPath: 'path=color:{{color}}|weight:{{weight}}|fillcolor:{{fillColor}}|enc:{{points}}'
 };
@@ -60,7 +60,7 @@ function loadFeature( feature ) {
 	var encodeds = encodeFeature( feature );
 	var paths = _.map( encodeds, pathFromEncoded );
 	var vars = {
-		key: '', // settings.apiKey,
+		key: settings.apiKey,
 		width: staticMapWidth,
 		height: staticMapHeight,
 		paths: paths.join('&')
