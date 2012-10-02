@@ -109,6 +109,7 @@ function encodeFeature( feature ) {
 		var encoded = encoder.dpEncodeToJSON( points );
 		encoded.color = '0x000000C0';
 		encoded.fillColor = '0x00000010';
+		encoded.weight = 2;
 		return encoded;
 	});
 }
