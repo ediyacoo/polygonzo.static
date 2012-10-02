@@ -13,11 +13,12 @@ var template = {
 	state: '\
 		<div class="state">\
 			<div class="header">\
-				{{name}}: {{{size}}}\
+				{{name}}: {{count}}{{{size}}} chars\
 			</div>\
 			{{{map}}}\
 		</div>',
 	loud: '<span style="color:red; font-weight:bold;">{{text}}</span>',
+	pathCount: '{{count}} paths, ',
 	staticMap: '\
 		<div class="staticmap">\
 			<img src="{{{url}}}" \
@@ -75,7 +76,10 @@ function loadFeature( feature ) {
 	var state = template.state({
 		map: staticMap,
 		name: feature.name,
-		size: size <= 2048 ? size : template.loud({ text:size })
+		size: size <= 2048 ? size :
+			template.loud({ text: size }),
+		count: paths.length <= 1 ? '' :
+			template.pathCount({ count: paths.length })
 	});
 	$('#output').append( state );
 }
