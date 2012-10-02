@@ -58,10 +58,10 @@ function loadGeoJSON( geo ) {
 
 function loadFeature( feature ) {
 	var state = featureState( feature );
-	var min = state.min || 40;
+	var minChars = state.minChars || 40;
 	var encodeds = encodeFeature( feature );
 	encodeds = _.filter( encodeds, function( encoded ) {
-		return encoded.points.length >= min;
+		return encoded.points.length >= minChars;
 	});
 	var paths = _.map( encodeds, pathFromEncoded );
 	var vars = {
@@ -92,7 +92,7 @@ function pathFromEncoded( encoded ) {
 
 function encodeFeature( feature ) {
 	var state = featureState( feature );
-	encoder = new PolylineEncoder( 1, 1, state.tiny || .05 );
+	encoder = new PolylineEncoder( 1, 1, ( state.detail || 1 ) * .05 );
 	var geometry = feature.geometry,
 		type = geometry.type,
 		coords = geometry.coordinates,
