@@ -41,8 +41,8 @@ var states = [
 		fips: '06',
 		abbr: 'CA',
 		name: 'California',
-		detail: null,
-		minChars: null
+		detail: .75,
+		minChars: 80
 	},
 	{
 		fips: '08',
@@ -69,21 +69,21 @@ var states = [
 		fips: '11',
 		abbr: 'DC',
 		name: 'District of Columbia',
-		detail: .002,
+		detail: .001,
 		minChars: null
 	},
 	{
 		fips: '12',
 		abbr: 'FL',
 		name: 'Florida',
-		detail: null,
+		detail: .7,
 		minChars: null
 	},
 	{
 		fips: '13',
 		abbr: 'GA',
 		name: 'Georgia',
-		detail: null,
+		detail: .75,
 		minChars: null
 	},
 	{
@@ -110,14 +110,14 @@ var states = [
 		fips: '18',
 		abbr: 'IN',
 		name: 'Indiana',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
 		fips: '19',
 		abbr: 'IA',
 		name: 'Iowa',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
@@ -152,8 +152,8 @@ var states = [
 		fips: '24',
 		abbr: 'MD',
 		name: 'Maryland',
-		detail: null,
-		minChars: null
+		detail: .5,
+		minChars: 80
 	},
 	{
 		fips: '25',
@@ -166,14 +166,14 @@ var states = [
 		fips: '26',
 		abbr: 'MI',
 		name: 'Michigan',
-		detail: null,
+		detail: .75,
 		minChars: 80
 	},
 	{
 		fips: '27',
 		abbr: 'MN',
 		name: 'Minnesota',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
@@ -250,14 +250,14 @@ var states = [
 		fips: '38',
 		abbr: 'ND',
 		name: 'North Dakota',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
 		fips: '39',
 		abbr: 'OH',
 		name: 'Ohio',
-		detail: null,
+		detail: .3,
 		minChars: null
 	},
 	{
@@ -271,14 +271,14 @@ var states = [
 		fips: '41',
 		abbr: 'OR',
 		name: 'Oregon',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
 		fips: '42',
 		abbr: 'PA',
 		name: 'Pennsylvania',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
@@ -299,7 +299,7 @@ var states = [
 		fips: '46',
 		abbr: 'SD',
 		name: 'South Dakota',
-		detail: null,
+		detail: .5,
 		minChars: null
 	},
 	{
@@ -334,7 +334,7 @@ var states = [
 		fips: '51',
 		abbr: 'VA',
 		name: 'Virginia',
-		detail: null,
+		detail: .75,
 		minChars: null
 	},
 	{
